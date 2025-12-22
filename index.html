@@ -76,7 +76,7 @@
     100% { background-position: 0% 50%; }
   }
 
-  /* Social links with animated gradient */
+  /* Social links with animated gradient & fade-in */
   #socials {
     display: none;
     margin-top: 30px;
@@ -86,7 +86,7 @@
 
   #socials a {
     display: block;
-    margin: 10px 0;
+    margin: 20px 0; /* more space between links */
     font-size: 28px;
     font-weight: 900;
     color: black;
@@ -97,8 +97,43 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 300% 300%;
-    animation: gradientMove 4s ease infinite;
+    animation: gradientMove 4s ease infinite, fadeIn 1s forwards;
+    opacity: 0;
   }
+
+  /* Fade-in animation with delay for each link */
+  #socials a:nth-child(1) { animation-delay: 0.5s; }
+  #socials a:nth-child(2) { animation-delay: 1.0s; }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Homie section */
+  .homie-section {
+    display: none;
+    margin-top: 40px;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .homie-section h2 {
+    font-family: 'Arial Black', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: #000;
+    margin-bottom: 10px;
+  }
+
+  .homie-section a {
+    font-family: 'Arial Black', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: #000;
+    text-decoration: underline;
+  }
+
 </style>
 </head>
 <body>
@@ -117,6 +152,12 @@
   <a href="https://www.youtube.com/@xxac37xyt" target="_blank">YOUTUBE</a>
 </div>
 
+<!-- Homie section -->
+<div class="homie-section">
+  <h2>My homie</h2>
+  <a href="https://open.spotify.com/artist/554d1AhywrvmcbGjm1qAZK?si=lgjreIVgTuyPZ_a62oud_g" target="_blank">Check them out on Spotify</a>
+</div>
+
 <!-- Hidden music -->
 <audio id="music" loop>
   <source src="song.mp3" type="audio/mpeg">
@@ -126,12 +167,14 @@
   const button = document.getElementById('enterButton');
   const placeholder = document.getElementById('placeholder');
   const socials = document.getElementById('socials');
+  const homie = document.querySelector('.homie-section');
   const audio = document.getElementById('music');
 
   button.addEventListener('click', () => {
     button.style.display = 'none';
     placeholder.style.display = 'block';
     socials.style.display = 'block';
+    homie.style.display = 'block';
     audio.volume = 0.2;
     audio.play().catch(() => {});
   });
