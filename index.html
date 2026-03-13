@@ -4,78 +4,98 @@
 <meta charset="UTF-8">
 <title>onyxu</title>
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: white;
-    text-align: center;
-  }
 
-  canvas#bgCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-  }
+html, body{
+margin:0;
+padding:0;
+height:100%;
+overflow:hidden;
+font-family:Arial,sans-serif;
+background:#111;
+color:white;
+text-align:center;
+}
 
-  #placeholder {
-    font-size: 48px;
-    font-weight: bold;
-    margin-top: 40px;
-    z-index: 1;
-    position: relative;
-    background: linear-gradient(90deg, #ff6ec7, #00f0ff, #fffd38, #ff6ec7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 300% 300%;
-    animation: gradientMove 4s ease infinite, popUp 2s ease forwards;
-  }
+canvas#bgCanvas{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:0;
+pointer-events:none;
+}
 
-  @keyframes popUp {
-    0% { transform: translateY(100px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
-  }
+#placeholder{
+font-size:48px;
+font-weight:bold;
+margin-top:40px;
+z-index:1;
+position:relative;
+background:linear-gradient(90deg,#ff6ec7,#00f0ff,#fffd38,#ff6ec7);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-size:300% 300%;
+animation:gradientMove 4s ease infinite,popUp 2s ease forwards;
+}
 
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+@keyframes popUp{
+0%{transform:translateY(100px);opacity:0;}
+100%{transform:translateY(0);opacity:1;}
+}
 
-  #socials {
-    margin-top: 30px;
-    z-index: 1;
-    position: relative;
-  }
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
 
-  #socials a {
-    display: block;
-    margin: 20px 0;
-    font-size: 28px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-decoration: none;
-    background: linear-gradient(90deg, #ff6ec7, #00f0ff, #fffd38, #ff6ec7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 300% 300%;
-    animation: gradientMove 4s ease infinite, fadeIn 1s forwards;
-    opacity: 0;
-  }
+#socials{
+margin-top:30px;
+z-index:1;
+position:relative;
+}
 
-  #socials a:nth-child(1) { animation-delay: 0.5s; }
+#socials a{
+display:block;
+margin:20px 0;
+font-size:28px;
+font-weight:900;
+letter-spacing:2px;
+text-decoration:none;
+background:linear-gradient(90deg,#ff6ec7,#00f0ff,#fffd38,#ff6ec7);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-size:300% 300%;
+animation:gradientMove 4s ease infinite,fadeIn 1s forwards;
+opacity:0;
+}
 
-  @keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
+#socials a:nth-child(1){animation-delay:0.5s;}
+
+@keyframes fadeIn{
+0%{opacity:0;transform:translateY(20px);}
+100%{opacity:1;transform:translateY(0);}
+}
+
+.spotify-section{
+margin-top:40px;
+z-index:1;
+position:relative;
+}
+
+.spotify-title{
+font-size:26px;
+font-weight:900;
+margin-bottom:15px;
+color:white;
+}
+
+.spotify-embed{
+width:100%;
+max-width:500px;
+border-radius:12px;
+}
 
 </style>
 </head>
@@ -86,77 +106,107 @@
 <div id="placeholder">My Socials</div>
 
 <div id="socials">
-  <a href="https://www.tiktok.com/@xxac37xyt" target="_blank">TIKTOK</a>
+<a href="https://www.tiktok.com/@xxac37xyt" target="_blank">TIKTOK</a>
+</div>
+
+<div class="spotify-section">
+
+<div class="spotify-title">My Spotify</div>
+
+<iframe class="spotify-embed"
+src="https://open.spotify.com/embed/artist/5OlChR2cUiTnFZ7dzrWx6M?utm_source=generator"
+width="100%"
+height="352"
+frameborder="0"
+allowfullscreen=""
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+loading="lazy">
+</iframe>
+
 </div>
 
 <audio id="music" autoplay loop>
-  <source src="song.mp3" type="audio/mpeg">
+<source src="song.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-  const audio = document.getElementById('music');
-  audio.volume = 0.2;
 
-  const canvas = document.getElementById('bgCanvas');
-  const ctx = canvas.getContext('2d');
-  let width = canvas.width = window.innerWidth;
-  let height = canvas.height = window.innerHeight;
+const audio=document.getElementById("music");
+audio.volume=0.2;
 
-  const numDots = 80;
-  const dots = [];
+const canvas=document.getElementById("bgCanvas");
+const ctx=canvas.getContext("2d");
 
-  function random(min, max) { return Math.random() * (max - min) + min; }
+let width=canvas.width=window.innerWidth;
+let height=canvas.height=window.innerHeight;
 
-  for (let i = 0; i < numDots; i++) {
-    dots.push({
-      x: random(0, width),
-      y: random(0, height),
-      vx: random(-0.3, 0.3),
-      vy: random(-0.3, 0.3),
-      radius: random(1,3)
-    });
-  }
+const numDots=80;
+const dots=[];
 
-  function animate() {
-    ctx.clearRect(0,0,width,height);
+function random(min,max){return Math.random()*(max-min)+min;}
 
-    for (let i = 0; i < dots.length; i++) {
-      const d1 = dots[i];
-      for (let j = i + 1; j < dots.length; j++) {
-        const d2 = dots[j];
-        const dist = Math.hypot(d1.x - d2.x, d1.y - d2.y);
-        if(dist < 120) {
-          ctx.strokeStyle = 'rgba(255,255,255,0.05)';
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(d1.x, d1.y);
-          ctx.lineTo(d2.x, d2.y);
-          ctx.stroke();
-        }
-      }
-    }
+for(let i=0;i<numDots;i++){
+dots.push({
+x:random(0,width),
+y:random(0,height),
+vx:random(-0.3,0.3),
+vy:random(-0.3,0.3),
+radius:random(1,3)
+});
+}
 
-    for (let i = 0; i < dots.length; i++) {
-      const d = dots[i];
-      d.x += d.vx;
-      d.y += d.vy;
-      if(d.x < 0 || d.x > width) d.vx *= -1;
-      if(d.y < 0 || d.y > height) d.vy *= -1;
-      ctx.fillStyle = 'rgba(255,255,255,0.05)';
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, d.radius, 0, Math.PI * 2);
-      ctx.fill();
-    }
+function animate(){
 
-    requestAnimationFrame(animate);
-  }
+ctx.clearRect(0,0,width,height);
 
-  animate();
+for(let i=0;i<dots.length;i++){
+const d1=dots[i];
 
-  window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  });
+for(let j=i+1;j<dots.length;j++){
+const d2=dots[j];
+
+const dist=Math.hypot(d1.x-d2.x,d1.y-d2.y);
+
+if(dist<120){
+ctx.strokeStyle="rgba(255,255,255,0.05)";
+ctx.lineWidth=1;
+ctx.beginPath();
+ctx.moveTo(d1.x,d1.y);
+ctx.lineTo(d2.x,d2.y);
+ctx.stroke();
+}
+}
+}
+
+for(let i=0;i<dots.length;i++){
+
+const d=dots[i];
+
+d.x+=d.vx;
+d.y+=d.vy;
+
+if(d.x<0||d.x>width)d.vx*=-1;
+if(d.y<0||d.y>height)d.vy*=-1;
+
+ctx.fillStyle="rgba(255,255,255,0.05)";
+ctx.beginPath();
+ctx.arc(d.x,d.y,d.radius,0,Math.PI*2);
+ctx.fill();
+
+}
+
+requestAnimationFrame(animate);
+
+}
+
+animate();
+
+window.addEventListener("resize",()=>{
+width=canvas.width=window.innerWidth;
+height=canvas.height=window.innerHeight;
+});
+
 </script>
+
 </body>
 </html>
